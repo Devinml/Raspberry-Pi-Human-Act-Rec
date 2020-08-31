@@ -2,8 +2,8 @@
 # it will be used as the I2C controller and function harbor for the project 
 # refer to datasheet and register map for full explanation
 
-import smbus2,time
-
+import smbus2 as smbus
+import time
 def MPU6050_start():
     # alter sample rate (stability)
     samp_rate_div = 0 # sample rate = 8 kHz/(1+samp_rate_div)
