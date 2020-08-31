@@ -2,7 +2,7 @@
 # it will be used as the I2C controller and function harbor for the project 
 # refer to datasheet and register map for full explanation
 
-import smbus,time
+import smbus2
 
 def MPU6050_start():
     # alter sample rate (stability)
