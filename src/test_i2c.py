@@ -1,5 +1,5 @@
 from mpu9250_i2c import *
-
+import RPi.GPIO as GPIO
 time.sleep(1) # delay necessary to allow mpu9250 to settle
 
 print('recording data')
