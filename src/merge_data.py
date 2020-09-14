@@ -26,4 +26,5 @@ if __name__ == '__main__':
     repo = 'Raspberry-Pi-Human-Act-Rec'
     directory = root + repo
     out_df = loop_dir(directory)
+    out_df.to_csv('data/merged_data.txt')
     
