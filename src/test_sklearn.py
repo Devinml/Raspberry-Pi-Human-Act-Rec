@@ -10,6 +10,6 @@ model = pickle.load(infile)
 
 
 df = pd.read_csv('data/testactivity_2_13_13_34.txt')
-print(df.columns)
+print(df.head())
 # X = df[['X','Y','Z','alpha','gamma','beta']]
 # model.predict(X)
