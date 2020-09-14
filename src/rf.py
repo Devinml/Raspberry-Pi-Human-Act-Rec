@@ -13,5 +13,5 @@ y = merged_data['activity']
 rf = RandomForestClassifier()
 rf.fit(X,y)
 
-filename = 'model/spectral_trained_model.pkl'
+filename = 'model/spectral_trained_model.sav'
 pickle.dump(rf, open(filename, 'wb'))
