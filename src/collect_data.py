@@ -45,7 +45,7 @@ class GetData(object):
         with open(fp,'w') as f:
             f.write('X, Y, Z, alpha, gamma, beta, activity,test\n')
             count = 0
-            while count < 100:
+            while count < 2000:
                 x,y,z = self.mpu.readAccelerometerMaster()
                 alpha, gamma, beta = self.mpu.readGyroscopeMaster()
                 f.write(f'{x},{y},{z},{alpha},{gamma},{beta}, {self.activity}, {self.test} \n')
