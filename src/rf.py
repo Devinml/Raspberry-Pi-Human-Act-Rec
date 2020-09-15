@@ -2,7 +2,7 @@ from sklearn.ensemble import RandomForestClassifier
 import pickle
 import pandas as pd
 import numpy as np
-
+import joblib
 
 
 merged_data = pd.read_csv('data/merged_data.txt')
@@ -13,5 +13,5 @@ y = merged_data['activity']
 rf = RandomForestClassifier()
 rf.fit(X,y)
 
-filename = 'model/spectral_trained_model.sav'
-pickle.dump(rf, open(filename, 'wb'))
+filename = 'model/test_model.sav'
+joblib.dump(rf, open(filename, 'wb'))
