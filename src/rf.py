@@ -10,9 +10,9 @@ merged_data = pd.read_csv('data/merged_data.txt')
 
 X = merged_data[['X','Y','Z','alpha','gamma','beta']]
 y = merged_data['activity']
-
+X = np.ascontiguousarray(X, dtype='float32')
 rf = RandomForestClassifier()
-rf.fit(X.astype(np.float),y.astype(np.int))
+rf.fit(X,y.astype(np.int))
 
 filename = 'model/anothertest.pkl'
 # joblib.dump(rf, open(filename, 'wb'))
