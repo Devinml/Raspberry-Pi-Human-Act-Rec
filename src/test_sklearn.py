@@ -8,7 +8,7 @@ import joblib
 file_name = 'model/spectral_trained_model.sav'
 infile = open(file_name, 'rb')
 # model = pickle.load(infile)
-filename = 'model/test_model.sav'
+filename = 'model/test_model_new.sav'
 loaded_model = joblib.load(filename)
 
 

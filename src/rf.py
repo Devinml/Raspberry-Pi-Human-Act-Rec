@@ -13,5 +13,5 @@ y = merged_data['activity']
 rf = RandomForestClassifier()
 rf.fit(X,y)
 
-filename = 'model/test_model.sav'
+filename = 'model/test_model_new.sav'
 joblib.dump(rf, open(filename, 'wb'))
