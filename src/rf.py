@@ -12,7 +12,7 @@ X = merged_data[['X','Y','Z','alpha','gamma','beta']]
 y = merged_data['activity']
 
 rf = RandomForestClassifier()
-rf.fit(X,y)
+rf.fit(X.astype(np.float),y.astype(np.int))
 
 filename = 'model/anothertest.pkl'
 # joblib.dump(rf, open(filename, 'wb'))
