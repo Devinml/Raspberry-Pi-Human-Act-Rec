@@ -2,8 +2,13 @@ from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 import numpy as np
 import scipy
-rf = RandomForestClassifier()
+import pickle
+file_name = 'model/spectral_trained_model.sav'
+infile = open(file_name, 'rb')
+model = pickle.load(infile)
+
+
 
 df = pd.read_csv('data/testactivity_2_13_13_34.txt')
-# X = df.drop('')
-print(df.head())
+X = df[['X','Y','Z','alpha','gamma','beta']]
+model.predict(X)
