@@ -105,48 +105,51 @@ def main():
                      gyrox_std,
                      gyroy_std,
                      gyroz_std) = stats.get_stats()
-                    data = {'x1': [x1],
-                            'x2': [x2],
-                            'x3': [x3],
-                            'y1': [y1],
-                            'y2': [y2],
-                            'y3': [y3],
-                            'z1': [z1],
-                            'z2': [z2],
-                            'z3': [z3],
-                            'gyro_x1': [gyro_x1],
-                            'gyro_x2': [gyro_x2],
-                            'gyro_x3': [gyro_x3],
-                            'gyro_y1': [gyro_y1],
-                            'gyro_y2': [gyro_y2],
-                            'gyro_y3': [gyro_y3],
-                            'gyro_z1': [gyro_z1],
-                            'gyro_z2': [gyro_z2],
-                            'gyro_z3': [gyro_z3],
-                            'x_mean':  [x_mean],
-                            'y_mean':  [y_mean],
-                            'z_mean':  [z_mean],
-                            'gyrox_mean':  [gyrox_mean],
-                            'gyroy_mean':  [gyroy_mean],
-                            'gyroz_mean':  [gyroz_mean],
-                            'x_std':  [x_std],
-                            'y_std':  [y_std],
-                            'z_std':  [z_std],
-                            'gyrox_std':  [gyrox_std],
-                            'gyroy_std':  [gyroy_std],
-                            'gyroz_std':  [gyroz_std]}
+
+
+                    data = { 'x_mean': [x_mean],
+                             'y_mean':[y_mean],
+                             'z_mean':[z_mean],
+                             'gyrox_mean':[gyrox_mean],
+                             'gyroy_mean':[gyroy_mean],
+                             'gyroz_mean':[gyroz_mean],
+                             'x_std':[x_std],
+                             'y_std':[y_std],
+                             'z_std':[z_std],
+                             'gyrox_std':[gyrox_std],
+                             'gyroy_std':[gyroy_std],
+                             'gyroz_std':[gyroz_std],
+                             'x_0_1.17':[x1],
+                             'x_1.17_2.34':[x2],
+                             'x_2.34_4.1':[x3],
+                             'y_0_1.17':[y1],
+                             'y_1.17_2.34':[y2],
+                             'y_2.34_4.1':[y3],
+                             'z_0_1.17':[z1],
+                             'z_1.17_2.34':[z2],
+                             'z_2.34_4.1':[z3],
+                             'gyrox_0_1.17':[gyro_x1],
+                             'gyrox_1.17_2.34':[gyro_x2],
+                             'gyrox_2.34_4.1':[gyro_x3],
+                             'gyroy_0_1.17':[gyro_y1],
+                             'gyroy_1.17_2.34':[gyro_y2],
+                             'gyroy_2.34_4.1':[gyro_y3],
+                             'gyroz_0_1.17':[gyro_z1],
+                             'gyroz_1.17_2.34':[gyro_z2],
+                             'gyroz_2.34_4.1':[gyro_z3]}
+
                     X = pd.DataFrame.from_dict(data)
                     X = scaler.transform(X)
-                    pred = model.predict(X))
+                    pred = model.predict(X)
                     if pred == 1:
                         display.lcd_clear()
                         display.lcd_display_string("Walking", 1)
-                    elif pred = 2:
+                    elif pred == 2:
                         display.lcd_clear()
                         display.lcd_display_string("Walking up", 1)
-                    elif pred = 3:
+                    elif pred == 3:
                         display.lcd_clear()
-                        display.lcd_display_string("Walking dow", 1)
+                        display.lcd_display_string("Walking down", 1)
                         
 
     except KeyboardInterrupt:
