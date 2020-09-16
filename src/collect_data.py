@@ -2,10 +2,11 @@ import time
 from mpu9250_jmdev.registers import *
 from mpu9250_jmdev.mpu_9250 import MPU9250
 import datetime
+import pandas as pd
 
 class GetData(object):
 
-    def __init__(self, activity, test):
+    def __init__(self, activity, test, data_points):
         self.mpu = self.setup()
         self.activity = activity
         now = datetime.datetime.now()
@@ -14,6 +15,7 @@ class GetData(object):
         self.minute = now.minute
         self.second = now.second
         self.test = test
+        self.data_points = data_points
 
     def setup(self):
         mpu = MPU9250(
@@ -45,9 +47,31 @@ class GetData(object):
         with open(fp,'w') as f:
             f.write('X, Y, Z, alpha, gamma, beta, activity,test\n')
             count = 0
-            while count < 2000:
+            while count < self.data_points:
                 x,y,z = self.mpu.readAccelerometerMaster()
                 alpha, gamma, beta = self.mpu.readGyroscopeMaster()
                 f.write(f'{x},{y},{z},{alpha},{gamma},{beta}, {self.activity}, {self.test} \n')
                 count += 1
                 time.sleep(.02)
+
+    def list_of_data(self):
+        data_init = {'X': [],
+                    'Y': [],
+                    'Z': [],
+                    'alpha': [],
+                    'gamma': [],
+                    'beta': []}
+        data_df = pd.DataFrame()
+        while len(data_df) < self.data_points:
+            x, y, z = self.mpu.readAccelerometerMaster()
+            alpha, gamma, beta = self.mpu.readGyroscopeMaster()
+            data = {'alpha': alpha,
+                    'gamma': gamma,
+                    'beta': beta,
+                    'X': x,
+                    'Y': y,
+                    'Z':z,}
+            data_df = data_df.append(data, ignore_index=True)
+            time.sleep(.02)
+        return data_df
+

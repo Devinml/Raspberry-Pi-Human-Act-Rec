@@ -14,7 +14,7 @@ import joblib
 # file_name = 'model/spectral_trained_model.sav'
 # infile = open(file_name, 'rb')
 # model = pickle.load(infile)
-filename = 'model/anothertest_ec2.pkl'
+filename = 'model/anothertest_on_pi.pkl'
 clf = joblib.load(filename)
 
 

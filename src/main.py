@@ -3,6 +3,9 @@ import os
 import lcddriver
 import time
 from collect_data import GetData
+from featurize import DataStats, IntensityBands
+import pandas as pd
+import joblib
 
 def init_values():
     display = lcddriver.lcd()
@@ -75,7 +78,76 @@ def main():
 
             elif red_button.is_pressed:
                 print('Red')
-                display.lcd_display_string('red_button',1)
+                scaler = joblib.load('model/scalar.pkl')
+                model = joblib.load('model/log_model.pkl')
+                while True:
+                    running_data = GetData(activity=[0 for _ in range(6)],
+                                                    test=0,
+                                                    data_points=50)
+                    raw = running_data.list_of_data()
+                    inten_obj = IntensityBands(raw)
+                    (x1, x2, x3,
+                     y1, y2, y3,
+                     z1, z2, z3,
+                     gyro_x1, gyro_x2, gyro_x3,
+                     gyro_y1, gyro_y2, gyro_y3,
+                     gyro_z1, gyro_z2, gyro_z3) = inten_obj.intensity_bands()
+                    stats = DataStats(raw)
+                    (x_mean,
+                     y_mean,
+                     z_mean,
+                     gyrox_mean,
+                     gyroy_mean,
+                     gyroz_mean,
+                     x_std,
+                     y_std,
+                     z_std,
+                     gyrox_std,
+                     gyroy_std,
+                     gyroz_std) = stats.get_stats()
+                    data = {'x1': [x1],
+                            'x2': [x2],
+                            'x3': [x3],
+                            'y1': [y1],
+                            'y2': [y2],
+                            'y3': [y3],
+                            'z1': [z1],
+                            'z2': [z2],
+                            'z3': [z3],
+                            'gyro_x1': [gyro_x1],
+                            'gyro_x2': [gyro_x2],
+                            'gyro_x3': [gyro_x3],
+                            'gyro_y1': [gyro_y1],
+                            'gyro_y2': [gyro_y2],
+                            'gyro_y3': [gyro_y3],
+                            'gyro_z1': [gyro_z1],
+                            'gyro_z2': [gyro_z2],
+                            'gyro_z3': [gyro_z3],
+                            'x_mean':  [x_mean],
+                            'y_mean':  [y_mean],
+                            'z_mean':  [z_mean],
+                            'gyrox_mean':  [gyrox_mean],
+                            'gyroy_mean':  [gyroy_mean],
+                            'gyroz_mean':  [gyroz_mean],
+                            'x_std':  [x_std],
+                            'y_std':  [y_std],
+                            'z_std':  [z_std],
+                            'gyrox_std':  [gyrox_std],
+                            'gyroy_std':  [gyroy_std],
+                            'gyroz_std':  [gyroz_std]}
+                    X = pd.DataFrame.from_dict(data)
+                    X = scaler.transform(X)
+                    pred = model.predict(X))
+                    if pred == 1:
+                        display.lcd_clear()
+                        display.lcd_display_string("Walking", 1)
+                    elif pred = 2:
+                        display.lcd_clear()
+                        display.lcd_display_string("Walking up", 1)
+                    elif pred = 3:
+                        display.lcd_clear()
+                        display.lcd_display_string("Walking dow", 1)
+                        
 
     except KeyboardInterrupt:
         print("Cleaning up!")
