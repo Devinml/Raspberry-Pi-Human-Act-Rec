@@ -3,8 +3,6 @@ import pandas as pd
 import numpy as np
 
 
-
-
 def loop_dir(directory):
     fp = directory + '/data'
     data = os.listdir(fp)
